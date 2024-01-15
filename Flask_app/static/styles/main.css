@@ -1,0 +1,38 @@
+ h1{
+    font-family: 'Your Desired Font', sans-serif;
+    color: black;
+    font-size: 40px;
+} 
+
+body {
+    font-family: 'Your Desired Font', sans-serif;
+    background-color: #acc5ff; 
+    color: black;
+    font-size: 20px;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+input[type = "file"]{
+    /* width: 100%; */
+    text-decoration: none;
+    margin-left:11%;
+    margin-right: auto;
+    text-align: center;
+}
+
+.Predict-button {
+    background-color: rgb(155, 170, 212);
+    color: black;
+    padding: 30px 60px;
+    border: none
+    border-radius: 5px;
+    font-size: 30px
+}
+
+.Predict-button:hover {
+    background-color:#10ad51;
+}
