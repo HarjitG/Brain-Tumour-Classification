@@ -40,8 +40,6 @@ def Upload():
         prediction = model.predict(img_array)
         class_label = np.argmax(prediction[0])
         label = Class_Names[class_label].replace('\'', '')
-        
-       # class_label = np.argmax(prediction[0])
         result = f'Tumor Class: {label}'
     except Exception as e:
         result = f'Error: {e}'
