@@ -7,8 +7,12 @@ name = "pypi"
 flask = "*"
 tensorflow = "*"
 numpy = "*"
-pandas = "*"
 pillow = "*"
+ipykernel = "*"
+matplotlib = "*"
+seaborn = "*"
+opencv-python = "*"
+scikit-learn = "*"
 
 [dev-packages]
 
