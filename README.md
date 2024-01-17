@@ -47,19 +47,18 @@ To run the Web application, navigate to the Flask_app folder
 ```shell
 cd Flask_app
 ```
-and run the following code:
+For MacOS run the following code in the terminal:
 ```shell
-Flask.py
+Python3 Flask.py
 ```
- This will create a Url which can be clicked and will open up in a tab in your browser.
+For Windows run the following code in the terminal:
+```shell
+Python Flask.py
+```
+
+ This will create a Url which can be copied and will open up in a tab in your browser.
 
 ![Loading image](/images/loader.png)
-
-This will open a website that looks like the following:
-
-![Website](/images/website.png)
-
-By clicking on Choose file users can upload a file from their local machine, and then by clicking the "Predict" button, this will predict the Tumor class using the model.
 
 This will open a website that looks like the following:
 
