@@ -1,17 +1,18 @@
 import flask
 import tensorflow as tf
 import numpy as np
+import os
 
 from flask import Flask, render_template, request
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
 app = Flask(__name__)
-model = load_model('Flask_app/model')
+model = load_model('model')
 
 global Class_Names
 
-Class_Names = ['Glioma Tumor', 'Meningioma Tumor', 'No Tumor', 'Pituitary Tumor']
+Class_Names = ['Glioma Tumour', 'Meningioma Tumour', 'No Tumour', 'Pituitary Tumour']
 
 def preprocess_image(file_path):
     img = image.load_img(file_path, target_size=(256, 256))
@@ -34,7 +35,7 @@ def Upload():
         return render_template('index.html', message='No selected file')
 
     try:
-        img_path = 'Flask_app/uploads/' + file.filename
+        img_path = 'uploads/' + file.filename
         file.save(img_path)
         img_array = preprocess_image(img_path)
         prediction = model.predict(img_array)
