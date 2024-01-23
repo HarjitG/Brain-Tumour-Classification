@@ -20,6 +20,8 @@ To run the notebooks or Flask web app, open the terminal, navigate to where you 
 
 ## Setting up
 
+Ensure that you have docker desktop installed on your machine and running
+
 Clone Repository in desired location
 ```shell
 git clone https://github.com/HarjitG/Brain-Tumour-Classification.git
@@ -27,6 +29,17 @@ git clone https://github.com/HarjitG/Brain-Tumour-Classification.git
 Navigate to the folder
 ```shell
 cd Brain-Tumour-Classification
+```
+## 1) For those using VSCode
+
+
+Launch VSCode and re-open the project in a Dev Container when prompted
+
+Open a Terminal
+
+Ensure Pipenv is installed
+```shell
+pip install pipenv
 ```
 
 Initialise Virtual Enviornment
@@ -39,29 +52,85 @@ Install required librarys for virtual enviornment
 pipenv install
 ```
 
-The Collab_Notebook_4d can now be ran.
+#### The Collab_Notebook_4d can now be ran.
 
-## Web application
 
-To run the Web application, navigate to the Flask_app folder
+Navigate to the Flask_app folder
 ```shell
 cd Flask_app
 ```
-For MacOS run the following code in the terminal:
+Run the following code to start the application:
 ```shell
-Python3 Flask.py
+python Flask.py
 ```
-For Windows run the following code in the terminal:
+
+## 2) For those using the Computer's Terminal
+
+Run the following to launch VSCode
 ```shell
-Python Flask.py
+code . 
 ```
+When propmpted open the folder in a container
+
+Run the following and copy the container_id
+```shell
+docker ps
+```
+
+Access the docker image, this should take you into your root user
+```shell
+docker exec -it  <container_id> /bin/bash 
+```
+
+Ensure that Pipenv is installed
+```shell
+pip install pipenv
+```
+
+Access the directory in workspace folder
+```shell
+cd /workspaces/Brain-Tumour-Classification
+```
+
+Initialise Virtual Enviornment
+```shell
+pipenv shell
+```
+
+Install required librarys for virtual enviornment
+```shell
+pipenv install
+```
+
+Navigate to the Flask_app folder
+```shell
+cd Flask_app
+```
+Run the following code to start the application:
+```shell
+python Flask.py
+```
+
+## Running Flask Application
+
+
+
 
  This will create a Url which can be copied and will open up in a tab in your browser.
 
+ 
+
 ![Loading image](/images/loader.png)
 
-This will open a website that looks like the following:
+Similarly, you can also enter the following url into your browser:
+```shell
+localhost:5000
+```
+
+This will open a webpage that looks like the following:
 
 ![Website](/images/website.png)
 
 By clicking on Choose file users can upload a file from their local machine, and then by clicking the "Predict" button, this will predict the Tumor class using the model.
+
+
