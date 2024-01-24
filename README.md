@@ -4,14 +4,14 @@ In this project I will be using Convulational Neural Networks (CNNs) to classify
 
 The dataset contains 4 different classes, 3 of which are different types of Tumors, and one of which is not a Tumour
 
-I have taken 3 different approaches to this project. The first was running a model on all 4 classes, however due to the number of tumours being classed as non-tumours, I am experimenting with another model with 2 parts:
+I have taken 2 different approaches to this project. The first was running a model on all 4 classes, however due to the number of tumours being classed as non-tumours, I am experimenting with another model with 2 parts:
 
 1) Classsifing Tumour vs Non Tumour
 2) Classifying the 3 differnet types of Tumours
 
 Colab_Notebook_Binary contains the 4 classes merged into 2 to give us Tumour vs Non Tumour. Colab_Notebook_3d contains the 3 classes of different tumors
 
-Colab_Notebook_4d contains all 4 classes and is the main notebook used in this project. We can see that the other two were not performigng as well, and hence this notebook is the focus of the project. From the notebook we can see that the model is not picking up Glioma Tumours well, however is picking up the other 3 classes well.
+Colab_Notebook_4d contains all 4 classes and is the main notebook used in this project. We can see that the other two notebooks were not performing as well, and hence this notebook is the focus of the project. From the notebook we can see that the model is not picking up Glioma Tumours well, however is picking up the other 3 classes.
 
 With the the use of Data Augmentiontation and Regularisation techniques I was able to improve the model accuracy, however was not able to get a model performing well across all 4 classes simultaneously, as shown below.
 
