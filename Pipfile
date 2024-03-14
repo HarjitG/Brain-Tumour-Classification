@@ -13,6 +13,7 @@ matplotlib = "*"
 seaborn = "*"
 opencv-python = "*"
 scikit-learn = "*"
+dvc = "*"
 
 [dev-packages]
 
