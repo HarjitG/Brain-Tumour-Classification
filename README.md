@@ -9,9 +9,9 @@ I have taken 2 different approaches to this project. The first was running a mod
 1) Classsifing Tumour vs Non Tumour
 2) Classifying the 3 differnet types of Tumours
 
-Colab_Notebook_Binary contains the 4 classes merged into 2 to give us Tumour vs Non Tumour. Colab_Notebook_3d contains the 3 classes of different tumors
+Colab_Notebook_Tumour_vs_non_Tumour contains the 4 classes merged into 2 to give us Tumour vs Non Tumour. Colab_Notebook_Tumour_classes contains the 3 classes of different tumors
 
-Colab_Notebook_4d contains all 4 classes and is the main notebook used in this project. We can see that the other two notebooks were not performing as well, and hence this notebook is the focus of the project. From the notebook we can see that the model is not picking up Glioma Tumours well, however is picking up the other 3 classes.
+Colab_Notebook_All_classes contains all 4 classes and is the main notebook used in this project. We can see that the other two notebooks were not performing as well, and hence this notebook is the focus of the project. From the notebook we can see that the model is not picking up Glioma Tumours well, however is picking up the other 3 classes.
 
 With the the use of Data Augmentiontation and Regularisation techniques I was able to improve the model accuracy, however was not able to get a model performing well across all 4 classes simultaneously, as shown below.
 
