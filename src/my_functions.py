@@ -1,5 +1,8 @@
 import tensorflow as tf
+import matplotlib.pyplot as plt
 import random
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
 
 def Load_Training_data(training_path):
     Training_data = tf.keras.utils.image_dataset_from_directory(
@@ -62,3 +65,28 @@ def augment_image(x, y):
 #         print(num_classes)
 
 #         return dataset
+
+def plot_loss(hist):
+    fig = plt.figure()
+    plt.plot(hist.history['loss'], color='teal', label='loss')
+    plt.plot(hist.history['val_loss'], color='orange', label='val_loss')
+    fig.suptitle('Loss', fontsize=20)
+    plt.legend(loc="upper left")
+    plt.show()
+
+
+def plot_accuracy(hist):
+    fig = plt.figure()
+    plt.plot(hist.history['accuracy'], color='teal', label='accuracy')
+    plt.plot(hist.history['val_accuracy'], color='orange', label='val_accuracy')
+    fig.suptitle('Accuracy', fontsize=20)
+    plt.legend(loc="upper left")
+    plt.show()
+
+def confusion_matrix(y_, yhat_binary):
+    conf = confusion_matrix(y_, yhat_binary)
+    sns.heatmap(conf, annot=True, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.title('Confusion Matrix')
+    plt.show()
