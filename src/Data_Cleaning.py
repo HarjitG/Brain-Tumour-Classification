@@ -3,7 +3,7 @@ from tensorflow.keras.metrics import Precision, Recall, BinaryAccuracy
 
 
 class Cleaner:
-    def __init__(self, ModelBuilder, pre=None, re=None, acc=None):
+    def __init__(self, ModelBuilder=None, pre = None, re = None, acc = None):
 
         self.ModelBuilder = ModelBuilder
         self.pre = Precision()
@@ -27,20 +27,20 @@ class Cleaner:
 
         return X_test, labels_testing
 
-    def y_predictor(self, X_test, labels_testing, ModelBuilder):
+    def y_predictor(self, X_test, labels_testing):
         y_ = labels_testing  # Our true y values
         yhat_ = []  # Empty list for predicted variables
 
-        yhat = ModelBuilder.model.predict(X_test)
+        yhat = self.ModelBuilder.model.predict(X_test)
         yhat_binary = np.argmax(yhat, axis=1)  # gets value of 1 and position
         yhat_.append(yhat_binary)
 
-        pre.update_state(y_, yhat_binary)
-        re.update_state(y_, yhat_binary)
-        acc.update_state(y_, yhat_binary)
+        self.pre.update_state(y_, yhat_binary)
+        self.re.update_state(y_, yhat_binary)
+        self.acc.update_state(y_, yhat_binary)
 
-        print(f"Precision: {pre.result().numpy()}")
-        print(f"Recall: {re.result().numpy()}")
-        print(f"Accuracy: {acc.result().numpy()}")
+        print(f"Precision: {self.pre.result().numpy()}")
+        print(f"Recall: {self.re.result().numpy()}")
+        print(f"Accuracy: {self.acc.result().numpy()}")
 
-        return y_, yhat_binary, pre, re, acc
+        return y_, yhat_binary, self.pre, self.re, self.acc
