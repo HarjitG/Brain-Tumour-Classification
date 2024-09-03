@@ -4,7 +4,20 @@ import seaborn as sns
 
 class Plotting_functions:
     def __init__(self,class_names):
-                 self.class_names = class_names
+        try:
+                
+            if not isinstance(class_names,list):
+                raise TypeError ("Input must be a list")
+            if len(class_names) != 4:
+                raise ValueError("The list must contain exactly 4 elements")
+            if not all(isinstance(item, str) for item in class_names):
+                raise TypeError("All elements in list must be of string format")
+            
+            self.class_names = class_names
+
+        except (TypeError, ValueError) as e:
+            print(f"Error: {e}")
+            raise
 
     def plot_tumour(self,batch_training, label = None):
         fig, ax = plt.subplots(ncols = 4, figsize = (20,20))
