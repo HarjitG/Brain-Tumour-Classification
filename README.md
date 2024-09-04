@@ -13,6 +13,14 @@ Colab_Notebook_Tumour_vs_non_Tumour contains the 4 classes merged into 2 to give
 
 Colab_Notebook_All_classes contains all 4 classes and is the main notebook used in this project. We can see that the other two notebooks were not performing as well, and hence this notebook is the focus of the project. From the notebook we can see that the model is not picking up Glioma Tumours well, however is picking up the other 3 classes.
 
+We also have the Colab_Notebook_local.ipynb notebook which contains the local version of this project (No GPUs utilised) allowing you to run the model on your own machine. This also contains the following imported Python libray classes:
+    
+    Data_Augmentation.py: Contains functions for Data Augmentation
+    Data_Cleaning.py: Cleans data and converts to necessary format
+    Data_Loader.py: Loads the images 
+    Model_Builder.py: Defines and Builds model
+    Plotting_functions.py: Functions to plot various graphs
+
 With the the use of Data Augmentiontation and Regularisation techniques I was able to improve the model accuracy, however was not able to get a model performing well across all 4 classes simultaneously, as shown below.
 
 Given that I had access to a larger dataset, the model may have yielded more accurate results, and is something that can be worked on in the future.
