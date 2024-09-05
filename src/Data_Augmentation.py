@@ -4,7 +4,14 @@ import random
 
 class Data_Augmentation:
     def __init__(self, threshold = 0.5):
-        self.threshold = threshold
+
+        try:
+            if not (0 < threshold < 1):
+                raise ValueError (f"Threshold should be between 0 and 1, but instead entered: {threshold}")
+            self.threshold = threshold
+        except ValueError as e:
+            print(f"Error: {e}")
+            raise
 
     def augment_image(self, x, y):
         # Probability of applying augmentation is 0.5, We don't want to apply augmentation to all images, only some.
