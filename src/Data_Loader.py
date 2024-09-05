@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 
 class DataLoader:
     def __init__(self, image_size=(256,256),
@@ -68,7 +69,6 @@ class DataLoader:
             raise
 
         # Proceed to load testing data
-
         Testing_data = tf.keras.utils.image_dataset_from_directory(
         testing_path,
         labels='inferred',
@@ -80,12 +80,17 @@ class DataLoader:
     def validate_data(self, dataset):
         try:
             for images,labels in dataset.as_numpy_iterator(): #taking first batch
-                print('images', images[1])
-                print('labels', labels[1])
+                # Checking shape size
                 if images.shape[1:] != (256,256,3):
                     raise ValueError ('Image should be of size (256,256,3)')
-                if labels.shape[1] != 1:
-                    raise ValueError ('Labels should be of length 1' )
+                
+                # Checking the labels are integers
+                if not np.issubdtype(labels.dtype, np.integer):
+                    raise ValueError(f"labels should be integers, but got {labels.dtype}") 
+
+                # Checking the dimension of the labels 
+                if labels.ndim != 1:
+                    raise ValueError (f'Labels should be a 1D array of shape (batch_size,), instead got {labels.shape}')
         except ValueError as e:
             print(f'Data validation error {e}')
             raise
