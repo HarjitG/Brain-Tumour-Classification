@@ -37,7 +37,7 @@ class CNNModel:
         self,
         l2_1=0.005,
         l2_2=0.01,
-        l2_3=0.005,
+        l2_3=0.01,
         dropout_rate_1=0.01,
         dropout_rate_2=0.01,
         dropout_rate_3=0.01,

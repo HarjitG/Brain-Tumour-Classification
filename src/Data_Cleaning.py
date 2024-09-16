@@ -25,18 +25,6 @@ class Cleaner:
 
         for batch in Test_data.as_numpy_iterator():
             x_test, y_test = batch
-            # Error checking
-            print(x_test.shape)
-            print(y_test.shape)
-            print('------------')
-
-            print(x_test[0])
-            print(y_test[0])
-
-
-
-
-
             y_test = [
                 np.where(row == 1)[0][0].tolist() for row in y_test
             ]  # Gets the position of the 1 to determine the type of tumor and assigns to a list
@@ -46,9 +34,15 @@ class Cleaner:
         labels_testing = np.array(labels_testing)  # Full y_test labels transformed
         X_test = np.array(X_test)  # Full X_test data
 
+        # print()
+        # print(labels_testing)
+        # print(X_test)
+
         return X_test, labels_testing
 
     def y_predictor(self, X_test, labels_testing):
+
+        
         y_ = labels_testing  # Our true y values
         yhat_ = []  # Empty list for predicted variables
 
