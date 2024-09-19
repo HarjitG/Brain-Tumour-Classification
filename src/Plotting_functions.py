@@ -5,7 +5,7 @@ import seaborn as sns
 import numpy as np
 
 class Plotting_functions:
-    def __init__(self,class_names):
+    def __init__(self,class_names, labels_testing=None):
         try:
                 
             if not isinstance(class_names,list):
@@ -16,6 +16,7 @@ class Plotting_functions:
                 raise TypeError("All elements in list must be of string format")
             
             self.class_names = class_names
+            self.labels_testing = labels_testing
 
         except (TypeError, ValueError) as e:
             print(f"Error: {e}")
@@ -54,11 +55,10 @@ class Plotting_functions:
             raise
 
         
-
     def plot_loss(self,hist):
         try:
             # Checking hist input is valid 
-            if not isinstance(hist, tf.keras.callbacks.history):
+            if not isinstance(hist, tf.keras.callbacks.History):
                 raise TypeError (f'Expected Hist object, but received {type(hist)}')
             
             # Checking for relevant keys 
@@ -84,7 +84,7 @@ class Plotting_functions:
 
         try:
             # Checking hist input is valid 
-            if not isinstance(hist, tf.keras.callbacks.history):
+            if not isinstance(hist, tf.keras.callbacks.History):
                 raise TypeError (f'Expected Hist object, but received {type(hist)}')
             
             # Checking for relevant keys 
@@ -99,15 +99,45 @@ class Plotting_functions:
             fig.suptitle('Accuracy', fontsize=20)
             plt.legend(loc="upper left")
             plt.show()
+
         except (ValueError, TypeError) as e:
             print (f'Error: {e}')
             raise
 
     def plot_confusion_matrix(self, y_true, y_pred_binary):
-        
-        conf = sk_confusion_matrix(y_true, y_pred_binary)
-        sns.heatmap(conf, annot=True, fmt='d', cmap='Blues', xticklabels=self.class_names, yticklabels=self.class_names)
-        plt.xlabel('Predicted')
-        plt.ylabel('Actual')
-        plt.title('Confusion Matrix')
-        plt.show()
+
+        try:
+            # Check if of numpy array
+            if not isinstance(y_true, np.ndarray):
+                raise TypeError (f'Should be of Numpy array, instead got {type(y_true)}')
+            if not isinstance(y_true, np.ndarray):
+                raise TypeError (f'Should be of Numpy array, instead got {type(y_true)}')
+            
+            # Check dimensionality
+            if y_true.ndim != 1:
+                raise ValueError (f'Expected a 1D array, instead got array of {y_true.ndim} Dimensions')
+            if y_pred_binary.ndim != 1:
+                raise ValueError (f'Expected a 1D array, instead got array of {y_pred_binary.ndim} Dimensions')
+            
+            # Checking number of values matches length of dataset
+            if y_true.shape[0] != len(self.labels_testing):
+                raise ValueError(f"Expected array of shape (394,), but got {y_true.shape} instead.")
+            if y_pred_binary.shape[0] != len(self.labels_testing):
+                raise ValueError(f"Expected array of shape (394,), but got {y_pred_binary.shape} instead.")
+            
+            # Check values are integers
+            if not np.issubdtype(y_true.dtype, np.int64):
+                raise ValueError(f"Expected integer values but array contains {y_true.dtype} values")
+            if not np.issubdtype(y_pred_binary.dtype, np.int64):
+                raise ValueError(f"Expected integer values but array contains {y_pred_binary.dtype} values")
+
+            conf = sk_confusion_matrix(y_true, y_pred_binary)
+            sns.heatmap(conf, annot=True, fmt='d', cmap='Blues', xticklabels=self.class_names, yticklabels=self.class_names)
+            plt.xlabel('Predicted')
+            plt.ylabel('Actual')
+            plt.title('Confusion Matrix')
+            plt.show()
+
+        except (ValueError, TypeError) as e:
+            print (f'Error: {e}')
+            raise
