@@ -110,7 +110,7 @@ class Plotting_functions:
             # Check if of numpy array
             if not isinstance(y_true, np.ndarray):
                 raise TypeError (f'Should be of Numpy array, instead got {type(y_true)}')
-            if not isinstance(y_true, np.ndarray):
+            if not isinstance(y_pred_binary, np.ndarray):
                 raise TypeError (f'Should be of Numpy array, instead got {type(y_true)}')
             
             # Check dimensionality

@@ -97,6 +97,7 @@ class DataLoader:
         except ValueError as e:
             print(f'Data validation error: {e}')
             raise
+        return dataset
 
     def validate_data_float(self, dataset):
         try:
@@ -115,3 +116,4 @@ class DataLoader:
         except ValueError as e:
             print(f'Data validation error: {e}')
             raise
+        return dataset

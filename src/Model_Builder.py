@@ -21,6 +21,7 @@ class CNNModel:
             # Error handling for num_classes
             if not (isinstance(num_classes, int) and num_classes != 1):
                 raise ValueError("num_classes must be an integer greater than 1.")
+            # Training and validating data is checked in the a cell right before by another method so no need to check here.
 
             self.input_shape = input_shape
             self.num_classes = num_classes
