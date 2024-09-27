@@ -17,6 +17,8 @@ dvc = "*"
 dvc-s3 = "*"
 mlflow = "*"
 dagshub = "*"
+pytest = "*"
+pickle5 = "*"
 
 [dev-packages]
 
