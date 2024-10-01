@@ -41,7 +41,22 @@ class Cleaner:
         return X_test, labels_testing
 
     def y_predictor(self, X_test, labels_testing):
+        try:
+            for images in X_test: #taking first batch
+                # Checking shape size
+                if images.shape != (256,256,1):
+                    raise ValueError ('Image should be of size (256,256,1)')
+                
+                # Checking the labels are integers
+                if not np.issubdtype(labels_testing.dtype, np.integer):
+                    raise ValueError(f"labels should be integers, but got {labels.dtype}") 
 
+                # Checking the dimension of the labels
+            if labels_testing.ndim != 1:
+                raise ValueError(f'Labels should be a 1D array of shape (batch_size,), instead got {labels.shape}')
+        except ValueError as e:
+            print(f'Data validation error: {e}')
+            raise
         
         y_ = labels_testing  # Our true y values
         yhat_ = []  # Empty list for predicted variables

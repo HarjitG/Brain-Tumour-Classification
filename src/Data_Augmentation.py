@@ -21,7 +21,7 @@ class Data_Augmentation:
             augmentations = [
                 lambda x: tf.image.random_flip_left_right(x),
                 lambda x: tf.image.random_flip_up_down(x),
-                lambda x: tf.image.rot90(x, k=tf.random.uniform(shape=[], minval=0, maxval=4, dtype=tf.int32)),
+                lambda x: tf.image.rot90(x, k=tf.random.uniform(shape=[], minval=1, maxval=4, dtype=tf.int32)),
             #  lambda x: tf.image.central_crop(x, central_fraction=tf.clip_by_value(tf.random.uniform(shape=[], minval=0.8, maxval=1.2), 0.0, 1.0)),
             ]
 

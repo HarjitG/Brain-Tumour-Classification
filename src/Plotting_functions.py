@@ -81,7 +81,6 @@ class Plotting_functions:
 
 
     def plot_accuracy(self,hist):
-
         try:
             # Checking hist input is valid 
             if not isinstance(hist, tf.keras.callbacks.History):

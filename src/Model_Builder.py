@@ -23,6 +23,7 @@ class CNNModel:
                 raise ValueError("num_classes must be an integer greater than 1.")
             # Training and validating data is checked in the a cell right before by another method so no need to check here.
 
+
             self.input_shape = input_shape
             self.num_classes = num_classes
             self.model = None
@@ -39,9 +40,9 @@ class CNNModel:
         l2_1=0.005,
         l2_2=0.01,
         l2_3=0.01,
-        dropout_rate_1=0.01,
+        dropout_rate_1=0.005,
         dropout_rate_2=0.01,
-        dropout_rate_3=0.01,
+        dropout_rate_3=0.005,
     ):
     
         try:
@@ -112,19 +113,37 @@ class CNNModel:
     def summary(self):
         self.model.summary()
 
-    def train(self, Training_data, Validation_data, epochs=15, log_dir=None, patience=3):
+    # def train(self, Training_data, Validation_data, epochs=15, log_dir=None, patience=3):
+    #     if log_dir is None:
+    #         raise ValueError("Log_dir not specified")
+    #     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
+    #     early_stopping = EarlyStopping(monitor="val_loss", patience=patience)
+
+    #     # Executing training of model
+
+    #     hist = self.model.fit(
+    #         x = Training_data,
+    #         validation_data= Validation_data,
+    #         epochs = epochs,
+    #         callbacks=[tensorboard_callback, early_stopping],
+    #     )
+
+    #     return hist
+    
+    def train(self, Training_data, Validation_data, epochs=15, log_dir=None, patience=3, tensorboard_callback=None, early_stopping_callback=None):
         if log_dir is None:
             raise ValueError("Log_dir not specified")
-        tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
-        early_stopping = EarlyStopping(monitor="val_loss", patience=patience)
+        
+        # Use provided callbacks if given, otherwise default to real callbacks
+        tensorboard_callback = tensorboard_callback or tf.keras.callbacks.TensorBoard(log_dir=log_dir)
+        early_stopping_callback = early_stopping_callback or tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=patience)
 
-        # Executing training of model
-
+        # Executing training of the model
         hist = self.model.fit(
-            x = Training_data,
-            validation_data= Validation_data,
-            epochs = epochs,
-            callbacks=[tensorboard_callback, early_stopping],
+            x=Training_data,
+            validation_data=Validation_data,
+            epochs=epochs,
+            callbacks=[tensorboard_callback, early_stopping_callback],
         )
 
         return hist
