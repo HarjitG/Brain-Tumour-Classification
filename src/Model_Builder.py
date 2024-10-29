@@ -1,4 +1,5 @@
 import tensorflow as tf
+import mlflow
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.regularizers import l2
@@ -39,7 +40,7 @@ class CNNModel:
         self,
         l2_1=0.005,
         l2_2=0.01,
-        l2_3=0.01,
+        l2_3=0.005,
         dropout_rate_1=0.005,
         dropout_rate_2=0.01,
         dropout_rate_3=0.005,
@@ -62,9 +63,18 @@ class CNNModel:
             if not (isinstance(dropout_rate_3, (int, float)) and 0 <= dropout_rate_3 <= 1):
                 raise ValueError("Value should floating number be between 0 and 1")
             
+            mlflow.log_param("l2_1", l2_1)
+            mlflow.log_param("l2_2", l2_2)
+            mlflow.log_param("l2_3", l2_3)
+            mlflow.log_param("dropout_rate_1", dropout_rate_1)
+            mlflow.log_param("dropout_rate_2", dropout_rate_2)
+            mlflow.log_param("dropout_rate_3", dropout_rate_3)
+            
         except ValueError as e:
             print (f"Error: {e}")
             raise
+
+        
 
         self.model = Sequential()
 
@@ -75,7 +85,7 @@ class CNNModel:
         )
         self.model.add(MaxPooling2D())
 
-        self.model.add(Conv2D(128, (3, 3), 1, activation="relu"))
+        self.model.add(Conv2D(16, (3, 3), 1, activation="relu"))
         self.model.add(MaxPooling2D())
 
         self.model.add(Conv2D(64, (3, 3), 1, activation="relu"))
@@ -106,29 +116,17 @@ class CNNModel:
             self.model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
             print('Model compiled successfully')
 
+            mlflow.log_param("optimizer", optimizer)
+            mlflow.log_param("loss_function", loss)
+
         except (ValueError, TypeError) as e:
             print(f'Error: {e}')
             raise
 
+        
+
     def summary(self):
         self.model.summary()
-
-    # def train(self, Training_data, Validation_data, epochs=15, log_dir=None, patience=3):
-    #     if log_dir is None:
-    #         raise ValueError("Log_dir not specified")
-    #     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
-    #     early_stopping = EarlyStopping(monitor="val_loss", patience=patience)
-
-    #     # Executing training of model
-
-    #     hist = self.model.fit(
-    #         x = Training_data,
-    #         validation_data= Validation_data,
-    #         epochs = epochs,
-    #         callbacks=[tensorboard_callback, early_stopping],
-    #     )
-
-    #     return hist
     
     def train(self, Training_data, Validation_data, epochs=15, log_dir=None, patience=3, tensorboard_callback=None, early_stopping_callback=None):
         if log_dir is None:
@@ -145,5 +143,11 @@ class CNNModel:
             epochs=epochs,
             callbacks=[tensorboard_callback, early_stopping_callback],
         )
+
+        # Log final training and validation metrics
+        mlflow.log_metric("final_train_loss", hist.history['loss'][-1])
+        mlflow.log_metric("final_val_loss", hist.history['val_loss'][-1])
+        mlflow.log_metric("final_train_accuracy", hist.history['accuracy'][-1])
+        mlflow.log_metric("final_val_accuracy", hist.history['val_accuracy'][-1])
 
         return hist

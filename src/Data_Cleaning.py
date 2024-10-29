@@ -17,8 +17,8 @@ class Cleaner:
             if not hasattr(Test_data, 'as_numpy_iterator'):
                 raise ValueError("Testing data must be Tensorflow object")
         except (ValueError) as e:
-           print(f'Error: {e}')
-           raise
+            print(f'Error: {e}')
+            raise
 
         labels_testing = []
         X_test = []
@@ -49,11 +49,11 @@ class Cleaner:
                 
                 # Checking the labels are integers
                 if not np.issubdtype(labels_testing.dtype, np.integer):
-                    raise ValueError(f"labels should be integers, but got {labels.dtype}") 
+                    raise ValueError(f"labels should be integers, but got {labels_testing.dtype}") 
 
                 # Checking the dimension of the labels
             if labels_testing.ndim != 1:
-                raise ValueError(f'Labels should be a 1D array of shape (batch_size,), instead got {labels.shape}')
+                raise ValueError(f'Labels should be a 1D array of shape (batch_size,), instead got {labels_testing.shape}')
         except ValueError as e:
             print(f'Data validation error: {e}')
             raise
