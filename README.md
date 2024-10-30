@@ -160,3 +160,63 @@ This will open a webpage that looks like the following:
 ![Website](/images/website.png)
 
 By clicking on Choose file users can upload a file from their local machine, and then by clicking the "Predict" button, this will predict the Tumor class using the model.
+
+# Running code locally
+
+## DVC
+
+DVC (Data Version control) allows users to upload data as well as pulling the most up-to-date data for model building.
+
+[DVC documentation](https://dvc.org/doc/start)
+
+After setting up the Virtual enviornmet as shown above, we can proceed to set up DVC
+
+Install dvc and dvc-s3
+
+```shell
+pip install dvc dvc-s3
+```
+
+Initialize DVC in your local project directory
+
+```shell
+dvc init
+```
+
+This will create a .dvc directory that will store all the DVC related files.
+
+Add Data to DVC
+
+```shell
+dvc add data/.
+```
+
+This will create a .dvc file that tracks your data.
+
+To add a remote or setup credentials go to the repository in DagsHub and click the remote button, then select the dvc option and follow the instructions.
+
+Commit Changes
+
+```shell
+git add .
+git commit -m "message"
+```
+
+Push to DagsHub
+
+```shell
+git push origin main
+```
+
+Push Data to DVC Remote
+
+```shell
+dvc push -r origin
+```
+
+Pull Changes
+
+```shell
+git pull origin main
+dvc pull -r origin
+```
